@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* === Design Tokens matching Figma FocusBoard === */
+:root {
+  /* Canvas & Surfaces */
+  --color-bg: #f8fafc;
+  --color-surface: #ffffff;
+  --color-surface-hover: #f8fafc;
+  --color-border: #e2e8f0;
+  --color-border-subtle: #f1f5f9;
+
+  /* Brand / Primary */
+  --color-primary: #4f46e5;
+  --color-primary-hover: #4338ca;
+  --color-primary-light: #eef2ff;
+  --color-primary-focus: rgba(79, 70, 229, 0.18);
+
+  /* Typography Colors */
+  --color-text-main: #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-muted: #94a3b8;
+
+  /* Status Colors */
+  --color-status-todo-text: #b45309;
+  --color-status-todo-bg: #fef3c7;
+  --color-status-todo-border: #fde68a;
+  --color-status-todo-dot: #f59e0b;
+
+  --color-status-inprogress-text: #1d4ed8;
+  --color-status-inprogress-bg: #dbeafe;
+  --color-status-inprogress-border: #bfdbfe;
+  --color-status-inprogress-dot: #2563eb;
+
+  --color-status-completed-text: #15803d;
+  --color-status-completed-bg: #dcfce7;
+  --color-status-completed-border: #bbf7d0;
+  --color-status-completed-dot: #16a34a;
+
+  /* Priority Colors */
+  --color-priority-high-text: #b91c1c;
+  --color-priority-high-bg: #fee2e2;
+  --color-priority-medium-text: #b45309;
+  --color-priority-medium-bg: #fef3c7;
+  --color-priority-low-text: #15803d;
+  --color-priority-low-bg: #dcfce7;
+
+  /* Category Colors */
+  --color-cat-design-text: #6b21a8;
+  --color-cat-design-bg: #f3e8ff;
+  --color-cat-dev-text: #1d4ed8;
+  --color-cat-dev-bg: #dbeafe;
+  --color-cat-content-text: #4338ca;
+  --color-cat-content-bg: #e0e7ff;
+  --color-cat-marketing-text: #9d174d;
+  --color-cat-marketing-bg: #fce7f3;
+  --color-cat-research-text: #b45309;
+  --color-cat-research-bg: #fef3c7;
+
+  /* Danger */
+  --color-danger: #dc2626;
+  --color-danger-hover: #b91c1c;
+  --color-danger-light: #fee2e2;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.08), 0 1px 2px -1px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+
+  /* Border Radii */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+  --radius-full: 9999px;
+
+  /* Spacing */
+  --space-2xs: 4px;
+  --space-xs: 6px;
+  --space-sm: 10px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+
+  /* Fonts */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --sidebar-width: 240px;
+}
+
+/* === Global Reset === */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--color-bg);
+  color: var(--color-text-main);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* === Accessibility: Focus styles === */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Screen reader only utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
