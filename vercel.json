@@ -1,5 +1,0 @@
-{
-  "buildCommand": "cd focusboard && npm run build",
-  "outputDirectory": "focusboard/dist",
-  "framework": "vite"
-}
