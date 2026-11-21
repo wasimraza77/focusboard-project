@@ -380,3 +380,50 @@ describe("FocusBoard — Acceptance Tests (07_ACCEPTANCE_TESTS.md)", () => {
     expect(screen.getByText("Small steps, big progress.")).toBeInTheDocument();
   });
 });
+
+
+  it("23. Navigation buttons (Overview, My tasks, Calendar, Settings) switch views and breadcrumbs", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+
+    const sidebar = screen.getByLabelText("Sidebar navigation");
+
+    // 1. Initial view is Overview
+    expect(screen.getByText("Your work, in focus.")).toBeInTheDocument();
+    expect(screen.getByText("Overview", { selector: ".breadcrumbs span.current" })).toBeInTheDocument();
+
+    // 2. Click "My tasks" in navigation
+    const myTasksNav = within(sidebar).getByRole("button", { name: /^my tasks$/i });
+    await user.click(myTasksNav);
+
+    // Breadcrumbs update to "My tasks"
+    expect(screen.getByText("My tasks", { selector: ".breadcrumbs span.current" })).toBeInTheDocument();
+    // Carousel and stat cards are hidden on the dedicated My Tasks page
+    expect(screen.queryByLabelText(/focus notes carousel/i)).not.toBeInTheDocument();
+
+    // 3. Click "Calendar" in navigation
+    const calendarNav = within(sidebar).getByRole("button", { name: /^calendar$/i });
+    await user.click(calendarNav);
+
+    // Calendar view renders
+    expect(screen.getByLabelText(/task calendar view/i)).toBeInTheDocument();
+    expect(screen.getByText("Calendar", { selector: ".breadcrumbs span.current" })).toBeInTheDocument();
+    expect(screen.getByText(/schedule, track, and plan your tasks by due date/i)).toBeInTheDocument();
+
+    // 4. Click "Settings" in navigation
+    const settingsNav = within(sidebar).getByRole("button", { name: /^settings$/i });
+    await user.click(settingsNav);
+
+    // Settings view renders
+    expect(screen.getByLabelText(/settings and preferences/i)).toBeInTheDocument();
+    expect(screen.getByText("Settings", { selector: ".breadcrumbs span.current" })).toBeInTheDocument();
+    expect(screen.getByText("Profile Details")).toBeInTheDocument();
+    expect(screen.getByText("Data & Storage Management")).toBeInTheDocument();
+
+    // 5. Click "Overview" to return
+    const overviewNav = within(sidebar).getByRole("button", { name: /^overview$/i });
+    await user.click(overviewNav);
+
+    expect(screen.getByText("Your work, in focus.")).toBeInTheDocument();
+    expect(screen.getByLabelText(/focus notes carousel/i)).toBeInTheDocument();
+  });

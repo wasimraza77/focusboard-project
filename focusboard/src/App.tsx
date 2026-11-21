@@ -14,6 +14,8 @@ import TaskToolbar from "./components/TaskToolbar";
 import TaskList from "./components/TaskList";
 import TaskForm from "./components/TaskForm";
 import ConfirmDialog from "./components/ConfirmDialog";
+import CalendarView from "./components/CalendarView";
+import SettingsView from "./components/SettingsView";
 import type { Task } from "./types/task";
 import "./styles/globals.css";
 import "./styles/app.css";
@@ -71,24 +73,56 @@ function DashboardMain() {
           type="button"
           className="user-avatar-btn"
           aria-label="User profile John Doe"
+          onClick={() => setActiveTab("settings")}
         >
           JD
         </button>
       </header>
 
-      {/* 3. Main Dashboard Canvas */}
+      {/* 3. Main Dashboard Content (Changes dynamically based on active navigation tab) */}
       <main className="app-main" id="main-content">
-        <DashboardHeader onCreateTask={handleOpenCreate} />
-        <FocusNotesCarousel />
-        <StatsCards />
+        <DashboardHeader
+          activeTab={activeTab}
+          onCreateTask={handleOpenCreate}
+        />
 
-        <section className="tasks-section" aria-label="Tasks management">
-          <TaskToolbar />
-          <TaskList
-            onEdit={handleOpenEdit}
-            onDelete={handleRequestDelete}
+        {/* Tab 1: Overview Dashboard */}
+        {activeTab === "overview" && (
+          <>
+            <FocusNotesCarousel />
+            <StatsCards />
+
+            <section className="tasks-section" aria-label="Tasks management">
+              <TaskToolbar />
+              <TaskList
+                onEdit={handleOpenEdit}
+                onDelete={handleRequestDelete}
+              />
+            </section>
+          </>
+        )}
+
+        {/* Tab 2: My Tasks View */}
+        {activeTab === "tasks" && (
+          <section className="tasks-section" aria-label="Tasks management full view">
+            <TaskToolbar />
+            <TaskList
+              onEdit={handleOpenEdit}
+              onDelete={handleRequestDelete}
+            />
+          </section>
+        )}
+
+        {/* Tab 3: Calendar View */}
+        {activeTab === "calendar" && (
+          <CalendarView
+            onCreateTask={handleOpenCreate}
+            onEditTask={handleOpenEdit}
           />
-        </section>
+        )}
+
+        {/* Tab 4: Settings View */}
+        {activeTab === "settings" && <SettingsView />}
       </main>
 
       {/* 4. Mobile Bottom Fixed Navigation */}
